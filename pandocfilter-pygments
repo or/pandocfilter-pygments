@@ -31,7 +31,13 @@ def pygmentize(key, value, format, meta):
         if format == "html5":
             format = "html"
 
-        return RawBlock(format, highlight(code, lexer, get_formatter_by_name(format)))
+        if format == "html":
+            formatter = get_formatter_by_name(format) \
+                            .__class__(cssclass="highlight " + klass)
+        else:
+            formatter = get_formatter_by_name(format)
+
+        return RawBlock(format, highlight(code, lexer, formatter))
 
 if __name__ == "__main__":
     toJSONFilter(pygmentize)
