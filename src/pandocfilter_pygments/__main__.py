@@ -2,6 +2,7 @@
 """
 Pandoc filter to pass all code blocks through pygments highlighter.
 """
+__app_name__ = "pandocfilter-pygments"
 
 from pandocfilters import toJSONFilter, RawBlock
 from pygments import highlight
@@ -39,5 +40,6 @@ def pygmentize(key, value, format, meta):
 
         return RawBlock(format, highlight(code, lexer, formatter))
 
-if __name__ == "__main__":
+
+def cli():
     toJSONFilter(pygmentize)
